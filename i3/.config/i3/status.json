@@ -1,0 +1,8 @@
+[
+  {"block": "music", "player": "spotify", "buttons": ["play", "next"]},
+  {"block": "memory", "type":"memory", "format_mem":"{Mup}%", "format_swap":"{SUp}%"},
+  {"block": "cpu", "interval": 1},
+  {"block": "load", "interval": 1, "format": "{1m}"},
+  {"block": "battery", "interval": 10},
+  {"block": "time", "interval": 60, "format": "%a %d/%m %R"}
+]
