@@ -34,12 +34,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'godlygeek/tabular'
-" Plugin 'ervandew/supertab'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
-" Plug 'racer-rust/vim-racer'
 Plug 'autozimu/LanguageClient-neovim', { 'tag': 'binary-*-x86_64-unknown-linux-musl' }
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
 " Plug 'raimondi/delimitmate'
 " Snippets
@@ -50,6 +47,7 @@ Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
 " glsl
 Plug 'tikhomirov/vim-glsl'
+Plug 'dag/vim-fish'
 "
 " Haskell
 "
