@@ -1,0 +1,6 @@
+#!/bin/sh
+
+c=$( rofi -dmenu -i -l 20 < "$HOME/.emoji" | cut -d ' ' -f 1 )
+
+echo "$c" | xclip -selection clipboard
+notify-send -u low -t 1000 "Copied $c to the clipboard"
