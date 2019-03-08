@@ -1,11 +1,11 @@
+" Fish doesn't play all that well with others
+set shell=/bin/bash
+" let mapleader = "\<Space>"
+
 " Vim-plug setup {{{1
 filetype off
 call plug#begin('$XDG_DATA_HOME/nvim/plugged')
 
-
-" Plugin 'Shougo/neocomplete.vim'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'roxma/nvim-completion-manager'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
@@ -22,6 +22,7 @@ Plug 'honza/dockerfile.vim'
 Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'myusuf3/numbers.vim'
 " Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-unimpaired'
@@ -36,7 +37,6 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'godlygeek/tabular'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
-Plug 'autozimu/LanguageClient-neovim', { 'tag': 'binary-*-x86_64-unknown-linux-musl' }
 Plug 'junegunn/fzf.vim'
 " Plug 'raimondi/delimitmate'
 " Snippets
@@ -48,6 +48,7 @@ Plug 'tpope/vim-speeddating'
 " glsl
 Plug 'tikhomirov/vim-glsl'
 Plug 'dag/vim-fish'
+Plug 'machakann/vim-highlightedyank'
 "
 " Haskell
 "
@@ -68,6 +69,7 @@ let g:solarized_base16=1
 colorscheme base16-atelier-dune
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 set mouse=a
 " FZF mappings
 nmap <c-p> :Files<cr>
@@ -195,18 +197,37 @@ nnoremap <leader>hI :HoogleInfo
 nnoremap <silent> <leader>hz :HoogleClose<CR>
 
 " }}}
+" Ale {{{1
+" Jump to next/previous error
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 1
+let g:ale_virtualtext_cursor = 1
+let g:ale_rust_rls_config = {
+	\ 'rust': {
+		\ 'all_targets': 1,
+		\ 'build_on_save': 1,
+		\ 'clippy_preference': 'on'
+	\ }
+	\ }
+let g:ale_rust_rls_toolchain = ''
+let g:ale_linters = {'rust': ['rls']}
+highlight link ALEWarningSign Todo
+highlight link ALEErrorSign WarningMsdg
+highlight link ALEVirtualTextWarning Todo
+highlight link ALEVirtualTextInfo Todo
+highlight link ALEVirtualTextError WarningMsg
+let g:ale_sign_error = "✖"
+let g:ale_sign_warning = "⚠"
+let g:ale_sign_info = "i"
+let g:ale_sign_hint = "➤"
+let g:ale_set_highlights = 0
 
-" Syntastic {{{1
-map <Leader>s :SyntasticToggleMode<CR>
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+nnoremap <silent> K :ALEHover<CR>
+nnoremap <silent> gd :ALEGoToDefinition<CR>
 
 " Supertab {{{1
 " let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
@@ -227,16 +248,27 @@ let g:syntastic_check_on_wq = 0
 " Type 1. something<C-j> for 2.
 " inoremap <C-j> <esc>:exe "norm Ypf lDB\<C-a>"<cr>A
 " Window handling
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" No arrow keys --- force yourself to use the home row
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" nnoremap <C-l> <C-w>l
 vnoremap <C-c> "+ygv"*y
 " Buffer handling mappings
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 nnoremap <Space> za
 " Leaders{{{1
+" <leader><leader> toggles between buffers
+nnoremap <leader><leader> <c-^>
+
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>z :wq<cr>
@@ -256,22 +288,8 @@ nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gp :Gpush<cr>
 nnoremap <leader>gw :Gwrite<cr>
 " Rust{{{1
-" autocmd FileType rust let g:syntastic_rust_checkers = ['cargo']
 let g:rustfmt_autosave = 1
 let g:racer_cmd = "~/.cargo/bin/racer"
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ }
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <leader>rr :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> <leader>ru :call LanguageClient_textDocument_references()<CR>
-nnoremap <silent> <leader>rs :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent> <leader>rf :call LanguageClient_textDocument_formatting()<CR>
-nnoremap <silent> <M-Enter> :call LanguageClient_textDocument_codeAction()<CR>
 
 " Fzf{{{1
 if executable("rg")
