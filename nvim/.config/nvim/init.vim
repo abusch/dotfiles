@@ -1,5 +1,5 @@
 " Fish doesn't play all that well with others
-set shell=/bin/bash
+" set shell=/bin/bash
 " let mapleader = "\<Space>"
 
 " Vim-plug setup {{{1
@@ -251,15 +251,20 @@ nnoremap <silent> gd :ALEGoToDefinition<CR>
 " nnoremap <C-h> <C-w>h
 " nnoremap <C-j> <C-w>j
 " nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
 nnoremap <down> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+" inoremap <up> <nop>
+" inoremap <down> <nop>
+" inoremap <left> <nop>
+" inoremap <right> <nop>
 
-" nnoremap <C-l> <C-w>l
+" imap <C-h> h
+" imap <C-j> j
+
 vnoremap <C-c> "+ygv"*y
 " Buffer handling mappings
 nnoremap <Tab> :bnext<CR>
