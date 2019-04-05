@@ -4,6 +4,8 @@ SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
 SETUVAR _fish_abbr_b:bat
+SETUVAR _fish_abbr_g:git
+SETUVAR _fish_abbr_gp:git\x20pull
 SETUVAR _fish_abbr_ls:exa
 SETUVAR _fish_abbr_o:xdg\x2dopen
 SETUVAR _fish_abbr_t:tig
@@ -35,4 +37,4 @@ SETUVAR fish_pager_color_completion:\x1d
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
-SETUVAR pure_version:2\x2e1\x2e1
+SETUVAR pure_version:2\x2e1\x2e4

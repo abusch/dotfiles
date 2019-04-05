@@ -13,6 +13,8 @@ abbr -a t tig
 abbr -a ts "tig status"
 abbr -a o xdg-open
 abbr -a b bat
+abbr -a g git
+abbr -a gp "git pull"
 
 if test -e /usr/share/fish/functions/fzf_key_bindings.fish
     fzf_key_bindings
