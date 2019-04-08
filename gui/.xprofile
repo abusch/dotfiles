@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# background
+[ -e ~/.fehbg ] && ~/.fehbg
+
+# Network Manager applet
+>> /dev/null which nm-applet && nm-applet &
+
+# Lock screen on suspend
+xss-lock -- i3lock -n -e -c 000000 &
+
+compton -b
