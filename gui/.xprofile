@@ -1,5 +1,10 @@
 #!/bin/sh
 
+xrandr --dpi 192
+
+# X resources
+[ -e ~/.Xresources ] && xrdb -merge ~/.Xresources
+
 # background
 [ -e ~/.fehbg ] && ~/.fehbg
 
