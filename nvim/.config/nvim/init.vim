@@ -11,13 +11,11 @@ endif
 filetype off
 call plug#begin('$XDG_DATA_HOME/nvim/plugged')
 
+" Semantic checking / LSP client / Completion engine
 " Use release branch (Recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'rking/ag.vim'
+" Theme
 Plug 'arcticicestudio/nord-vim'
-Plug 'honza/dockerfile.vim'
-Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'myusuf3/numbers.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -29,52 +27,41 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-abolish'
 Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
-Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'godlygeek/tabular'
-Plug 'rust-lang/rust.vim'
-Plug 'cespare/vim-toml'
+Plug 'machakann/vim-highlightedyank'
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+" Language support
+Plug 'honza/dockerfile.vim'
+Plug 'othree/html5.vim', { 'for': 'html' }
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'cespare/vim-toml'
+Plug 'tikhomirov/vim-glsl'
+Plug 'dag/vim-fish'
 " Snippets
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
-" glsl
-Plug 'tikhomirov/vim-glsl'
-Plug 'dag/vim-fish'
-Plug 'machakann/vim-highlightedyank'
-Plug 'https://github.com/alok/notational-fzf-vim'
 
 call plug#end()
 filetype plugin indent on
 
 " Setup {{{1
-" colorscheme solarized
-" let base16colorspace=256
-" let g:solarized_base16=1
-" set t_Co=256
-" colorscheme base16-atelier-dune
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 colorscheme nord
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
-set mouse=a
-" FZF mappings
-nmap <c-p> :Files<cr>
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
 
 " Options {{{1
+set mouse=a
 set bg=dark
 set cursorline
 set expandtab
-set foldmethod=marker
+set foldmethod=syntax
 set hidden
 set ignorecase
 set list
-" set listchars=tab:▸\ ,eol:¬
 set noequalalways
 " set nohlsearch
 set nojoinspaces
@@ -128,10 +115,7 @@ nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>z :wq<cr>
 nmap <leader>bq :bp <BAR> bd #<CR>
-nmap <leader>bl :ls<CR>
 nnoremap <leader>bb :Buffers<CR>
-nnoremap <leader>bm :CtrlPMixed<CR>
-nnoremap <leader>bs :CtrlPMRU<CR>
 " NERDTree
 nnoremap <Leader>n :NERDTreeToggle<CR>
 " fugitive{{{1
@@ -151,26 +135,11 @@ if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading
     set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always --ignore-case '.shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-
-let g:nv_search_paths = ['~/notes']
+nmap <c-p> :Files<cr>
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
 
 let g:UltiSnipsExpandTrigger="<c-tab>"
 
