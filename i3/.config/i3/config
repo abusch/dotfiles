@@ -168,7 +168,7 @@ bindsym $mod+x move workspace to output left
 bindsym $mod+y move workspace to output right
 
 # Switch screen modes
-bindsym $mod+m exec "xlayoutdisplay --dpi 220"
+bindsym $mod+m exec "xlayoutdisplay --dpi 240"
 # "~/.local/bin/setup-screens"
 # bindsym $mod+m exec "~/.screenlayout/multi.sh"
 # bindsym $mod+shift+m exec "~/.screenlayout/single.sh"
