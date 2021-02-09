@@ -313,6 +313,7 @@ margin-bottom = 0
 type = internal/github
 ; Accessing an access token stored in file
 token = ${file:/home/abusch/.config/polybar/github.token}
+user = "abusch"
 ; Whether empty notifications should be displayed or not
 empty-notifications = true
 ; Number of seconds in between requests
