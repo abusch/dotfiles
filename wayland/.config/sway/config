@@ -209,9 +209,9 @@ bindsym XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ '-5%'"
 bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ '+5%'"
 # bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 
-bindsym $mod+n exec "toggle-wifi"
-bindsym $mod+g exec "emoji-picker"
-bindsym $mod+p exec "passmenu"
+bindsym $mod+n exec "$HOME/.local/bin/toggle-wifi"
+bindsym $mod+g exec "$HOME/.local/bin/emoji-picker"
+bindsym $mod+p exec "$HOME/.local/bin/passmenu"
 bindsym XF86MonBrightnessDown exec "xbacklight -dec 10"
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 10"
 
