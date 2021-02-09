@@ -1,6 +1,6 @@
 " Fish doesn't play all that well with others
 set shell=/bin/bash
-" let mapleader = "\<Space>"
+let mapleader = "\<Space>"
 
 " Enable true color
 if has("termguicolors")
@@ -41,6 +41,7 @@ Plug 'dag/vim-fish'
 " Snippets
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'jceb/vim-orgmode'
 
 call plug#end()
 filetype plugin indent on
@@ -89,10 +90,10 @@ set shortmess+=c
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-l> <C-w>l
 " No arrow keys --- force yourself to use the home row
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
+" nnoremap <up> <nop>
+" nnoremap <down> <nop>
+" nnoremap <left> <nop>
+" nnoremap <right> <nop>
 " inoremap <up> <nop>
 " inoremap <down> <nop>
 " inoremap <left> <nop>
