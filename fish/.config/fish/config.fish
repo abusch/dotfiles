@@ -8,6 +8,13 @@ abbr -a b bat
 abbr -a g git
 abbr -a gp "git pull"
 
+# Enable vi-like mappings
+set -g fish_key_bindings fish_vi_key_bindings
+# use C-k/C-j to navigate history
+bind -M insert \ck history-search-backward
+bind -M insert \cj history-search-forward
+bind -M insert -k nul accept-autosuggestion
+
 if test -e /usr/share/fish/vendor_functions.d/fzf_key_bindings.fish
     fzf_key_bindings
 end
